@@ -1,0 +1,69 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<div class="container">
+    <br><br><br><br><br><br>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">
+        </div>
+        <div class="col-xs-6 col-sm-4 border-class rounded-lg">
+            <span style="font-size: x-large">SENAI</span>
+            <br>
+            <br>
+            <form [formGroup]="validGroup" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input [class.is-invalid] = "validGroup.get('emailControl').invalid && validGroup.get('emailControl').touched"
+                    type="email" class="form-control" formControlName="emailControl" placeholder="E-mail"/>
+                    <div *ngIf="(emailControl.invalid && emailControl.touched) || emailControl.dirty">
+                        <small *ngIf="emailControl.errors?.required" class="text-danger">É necessário um e-mail.</small>
+                        <small *ngIf="emailControl.errors?.pattern" class="text-danger">Por favor, coloque um e-mail válido.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input [class.is-invalid] = "validGroup.get('senhaControl').invalid && validGroup.get('senhaControl').touched"
+                    type="password" class="form-control" formControlName="senhaControl" placeholder="Senha" />
+                    <div *ngIf="(senhaControl.invalid && senhaControl.touched) || senhaControl.dirty">
+                        <small *ngIf="senhaControl.errors?.required" class="text-danger">É necessário digitar uma senha.</small>
+                        <small *ngIf="senhaControl.errors?.pattern" class="text-danger">É necessário uma senha com pelo menos 1 número, 1 letra maiúscula, 1 letra minúscula e 8 letras.</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="background-color: #5AB95F; border: solid #5AB95F">Log In</button>
+            </form>
+            <button type="button" class="btn" style="background-color: #3B98F5; border: solid #3B98F5; color: white" onclick="location.href='/usuario'">Cadastre-se Aqui</button>
+            <a href="/recuperar-senha" style="text-decoration: underline">Recupere sua senha aqui</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .col-sm-4 {
+        text-align: center;
+        color: rgb(94, 94, 94);
+    }
+
+    .border-class {
+        border: thin grey solid;
+        margin: 20px;
+        padding: 50px;
+        background-color: rgb(216, 216, 216);
+    }
+
+    .container {
+        font-weight: bold;
+    }
+
+    .btn {
+        width: 100%;
+        font-weight: bolder;
+        margin-bottom: 15px; 
+    }
+
+    .container {
+        align-content: center;
+    }
+
+    .button:active, 
+    .button:focus 
+    {
+        border:1px solid #00c;
+        color:#00c;
+    }
+</style>

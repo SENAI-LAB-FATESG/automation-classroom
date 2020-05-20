@@ -1,0 +1,150 @@
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+<form [formGroup]="validGroup" (ngSubmit)="onSubmit()">
+    <div class="container">
+        <br><br>
+        <h1>Perfil</h1><br><br>
+        <div class="row">
+            <div class="col-xs-6 col-sm-4"  style="text-align:center;">
+                <webcam 
+                [height]="500" 
+                [width]="300" 
+                [trigger]="triggerObservable" 
+                (imageCapture)="handleImage($event)"
+                (initError)="handleInitError($event)"></webcam>
+                <br><br>
+                <button type="button" class="btn btn-success" (click)="triggerSnapshot();" style="width: 50%;">Tirar Foto</button>
+                <br><br>
+                <div class="snapshot" *ngIf="webcamImage">
+                    <img [src]="webcamImage.imageAsDataUrl" class="img-fluid"/>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                    <label for="nome">Nome Completo:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('nomeControl').invalid && validGroup.get('nomeControl').touched"
+                        type="nome" class="form-control" formControlName="nomeControl" placeholder="Nome Completo" />
+                    <div *ngIf="(nomeControl.invalid && nomeControl.touched) || nomeControl.dirty">
+                        <small *ngIf="nomeControl.errors?.required" class="text-danger">É necessário um nome.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('emailControl').invalid && validGroup.get('emailControl').touched"
+                        type="email" class="form-control" formControlName="emailControl" placeholder="E-mail" />
+                    <div *ngIf="(emailControl.invalid && emailControl.touched) || emailControl.dirty">
+                        <small *ngIf="emailControl.errors?.required" class="text-danger">É necessário um e-mail.</small>
+                        <small *ngIf="emailControl.errors?.pattern" class="text-danger">Por favor, coloque um e-mail
+                            válido.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="celular">Celular:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('celularControl').invalid && validGroup.get('celularControl').touched"
+                        type="celular" class="form-control" formControlName="celularControl" placeholder="Celular" 
+                        mask="(00) 00000-0000"/>
+                    <div *ngIf="(celularControl.invalid && celularControl.touched) || celularControl.dirty">
+                        <small *ngIf="celularControl.errors?.required" class="text-danger">
+                            É necessário um número de celular(Forma correta: (DDD) 9XXXX-XXXX).</small>
+                        <small *ngIf="celularControl.errors?.pattern" class="text-danger">
+                            Por favor, coloque um número de celular válido(Forma correta: (DDD) 9XXXX-XXXX).</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('senhaControl').invalid && validGroup.get('senhaControl').touched"
+                        type="password" class="form-control" formControlName="senhaControl" placeholder="Senha" />
+                    <div *ngIf="(senhaControl.invalid && senhaControl.touched) || senhaControl.dirty">
+                        <small *ngIf="senhaControl.errors?.required" class="text-danger">É necessário digitar uma
+                            senha.</small>
+                        <small *ngIf="senhaControl.errors?.pattern" class="text-danger">É necessário uma senha com pelo
+                            menos 1 número, 1 letra maiúscula, 1 letra minúscula e 8 letras.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmar-senha">Confirmar Senha:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('confirmarSenhaControl').invalid && validGroup.get('confirmarSenhaControl').touched"
+                        type="password" class="form-control" formControlName="confirmarSenhaControl"
+                        placeholder="Senha" />
+                    <div
+                        *ngIf="(confirmarSenhaControl.invalid && confirmarSenhaControl.touched) || confirmarSenhaControl.dirty">
+                        <small *ngIf="confirmarSenhaControl.errors?.required" class="text-danger">É necessário digitar a
+                            senha novamente.</small>
+                        <small *ngIf="f.confirmarSenhaControl.errors?.mustMatch" class="text-danger">É necessário
+                            digitar a mesma senha.</small>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-6 col-sm-4">
+                <div class="form-group">
+                    <label for="cep">CEP:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('cepControl').invalid && validGroup.get('cepControl').touched"
+                        type="cep" class="form-control" formControlName="cepControl" placeholder="CEP" />
+                    <div *ngIf="(cepControl.invalid && cepControl.touched) || cepControl.dirty">
+                        <small *ngIf="cepControl.errors?.required" class="text-danger">É necessário um CEP.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="logradouro">Logradouro:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('logradouroControl').invalid && validGroup.get('logradouroControl').touched"
+                        type="logradouro" class="form-control" formControlName="logradouroControl"
+                        placeholder="Logradouro" />
+                    <div *ngIf="(logradouroControl.invalid && logradouroControl.touched) || logradouroControl.dirty">
+                        <small *ngIf="logradouroControl.errors?.required" class="text-danger">É necessário um
+                            Logradouro.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="complemento">Complemento:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('complementoControl').invalid && validGroup.get('complementoControl').touched"
+                        type="complemento" class="form-control" formControlName="complementoControl"
+                        placeholder="Complemento" />
+                    <div *ngIf="(complementoControl.invalid && complementoControl.touched) || complementoControl.dirty">
+                        <small *ngIf="complementoControl.errors?.required" class="text-danger">É necessário um
+                            Complemento.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('estadoControl').invalid && validGroup.get('estadoControl').touched"
+                        type="estado" class="form-control" formControlName="estadoControl" placeholder="Estado" />
+                    <div *ngIf="(estadoControl.invalid && estadoControl.touched) || estadoControl.dirty">
+                        <small *ngIf="estadoControl.errors?.required" class="text-danger">É necessário um
+                            Estado.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade:</label>
+                    <input
+                        [class.is-invalid]="validGroup.get('cidadeControl').invalid && validGroup.get('cidadeControl').touched"
+                        type="cidade" class="form-control" formControlName="cidadeControl" placeholder="Cidade" />
+                    <div *ngIf="(cidadeControl.invalid && cidadeControl.touched) || cidadeControl.dirty">
+                        <small *ngIf="cidadeControl.errors?.required" class="text-danger">É necessário um
+                            Cidade.</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <br><br><br><br>
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    .container {
+        font-weight: bold;
+    }
+
+    .btn {
+        width: 100%;
+    }
+</style>

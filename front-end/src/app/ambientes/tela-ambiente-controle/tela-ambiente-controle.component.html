@@ -1,0 +1,195 @@
+<div class="container">
+    <div class="row">
+        <div class="col" style="text-align:center;">
+            <br><br><br><br>
+            <webcam [height]="640" [width]="480" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+                (initError)="handleInitError($event)"></webcam>
+        </div>
+        <div class="col border-class rounded-lg">
+            <div class="row">
+                <h1 style="text-align: center;">Controle</h1>
+            </div>
+            <br>
+            <div class="row">
+                <label for="inputUnidade">Unidade:</label>
+                <select id="inputUnidade" class="form-control">
+                    <option selected>Default</option>
+                    <option>Unidade1</option>
+                    <option>Unidade2</option>
+                    <option>Unidade3</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="inputArea">Área:</label>
+                <select id="inputArea" class="form-control">
+                    <option selected>Default</option>
+                    <option>Área1</option>
+                    <option>Área2</option>
+                    <option>Área3</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="inputBloco">Bloco:</label>
+                <select id="inputBloco" class="form-control">
+                    <option selected>Default</option>
+                    <option>Bloco1</option>
+                    <option>Bloco2</option>
+                    <option>Bloco3</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="numeroOuNome">Número ou Nome:</label>
+                <input type="numeroOuNome" class="form-control" id="numeroOuNome" placeholder="Número ou Nome">
+            </div>
+            <div class="row">
+                <label for="capacidade">Capacidade:</label>
+                <input type="capacidade" class="form-control" id="capacidade" placeholder="Capacidade">
+            </div>
+            <div class="row">
+                <label for="capacidade">Capacidade:</label>
+                <input type="capacidade" class="form-control" id="capacidade" placeholder="Capacidade">
+            </div>
+            <br>
+            <div class="row" style="background-color: rgb(161, 161, 161); padding: 2px; text-align: center;">
+                <div class="col">
+                    Datashow
+                </div>
+                <div class="col">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" style="background-color: rgb(199, 199, 199); padding: 2px; text-align: center;">
+                <div class="col">
+                    Multimedia
+                </div>
+                <div class="col">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" style="background-color: rgb(161, 161, 161); padding: 2px; text-align: center;">
+                <div class="col">
+                    Ar condicionado
+                </div>
+                <div class="col">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" style="background-color: rgb(199, 199, 199); padding: 2px; text-align: center;">
+                <div class="col">
+                    Luz frontal
+                </div>
+                <div class="col">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row" style="background-color: rgb(161, 161, 161); padding: 2px; text-align: center;">
+                <div class="col">
+                    Luz fundo
+                </div>
+                <div class="col">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <br><br><br><br>
+                <button type="button" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-danger">Excluir</button>
+                <button type="button" class="btn btn-warning">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn {
+        width: 28%;
+        font-weight: bold;
+        color: white;
+        margin: auto;
+    }
+
+    .border-class {
+        border: thin grey solid;
+        margin: 20px;
+        padding: 50px;
+        background-color: white;
+    }
+
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 17px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 13px;
+        width: 13px;
+        left: 2px;
+        bottom: 2px;
+        background-color: grey;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(13px);
+        -ms-transform: translateX(13px);
+        transform: translateX(13px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 17px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>

@@ -1,0 +1,34 @@
+<div class="container">
+    <br><br><br><br><br>
+    Entre com o e-mail cadastrado para recuperar a senha.
+    <br><br>
+    <form [formGroup]="validGroup" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <input [class.is-invalid]="validGroup.get('emailControl').invalid && validGroup.get('emailControl').touched"
+                type="email" class="form-control" formControlName="emailControl"/>
+            <div *ngIf="(emailControl.invalid && emailControl.touched) || emailControl.dirty">
+                <small *ngIf="emailControl.errors?.required" class="text-danger">É necessário um e-mail.</small>
+                <small *ngIf="emailControl.errors?.pattern" class="text-danger">Por favor, coloque um e-mail
+                    válido.</small>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-danger">Enviar</button>
+    </form>
+</div>
+
+<style>
+    .container {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .form-group {
+        width: 45%;
+        margin: auto;
+    }
+
+    .btn {
+        width: 10%;
+    }
+</style>
