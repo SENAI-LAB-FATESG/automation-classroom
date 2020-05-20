@@ -8,5 +8,7 @@ namespace back_end.Domain
         public string Password { get; set; }
         public string CodeRFID { get; set; }
         public string Token { get; set; }
+        public bool EmailConfirmed { get; set; } //todo: trocar nome pra StatusConta
+        public string Foto {get; set; }
     }
 }

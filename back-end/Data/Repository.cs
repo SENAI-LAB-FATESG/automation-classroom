@@ -1,14 +1,17 @@
+using System.Globalization;
+using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using back_end.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace back_end.Data {
-    public class Repository<T> : IRepository<T> where T : BaseEntity {
+    public abstract class Repository<T> : IRepository<T> where T : BaseEntity {
 
-        private readonly DataBaseContext _context;
-        private DbSet<T> _database;
+        protected readonly DataBaseContext _context;
+        protected readonly DbSet<T> _database;
 
         public Repository(DataBaseContext context)
         {
@@ -16,7 +19,7 @@ namespace back_end.Data {
             _database = _context.Set<T>();
         }
 
-        public async Task<T> Create(T entity)
+        public virtual async Task<T> Create(T entity)
         {
             try
             {
@@ -36,7 +39,7 @@ namespace back_end.Data {
             return entity;
         }
 
-        public async Task<T> ResearchID(Guid id)
+        public virtual async Task<T> ResearchID(Guid id)
         {
             try
             {
@@ -52,7 +55,7 @@ namespace back_end.Data {
             }
         }
 
-        public async Task<IEnumerable<T>> ResearchAll()
+        public virtual async Task<IEnumerable<T>> ResearchAll()
         {
             try
             {
@@ -65,7 +68,7 @@ namespace back_end.Data {
             }
         }
 
-        public async Task<T> Update(T entity)
+        public virtual async Task<T> Update(T entity)
         {
             try
             {
@@ -86,7 +89,7 @@ namespace back_end.Data {
             return entity;
         }
 
-        public async Task<bool> Delete(Guid id)
+        public virtual async Task<bool> Delete(Guid id)
         {
             try
             {
@@ -105,7 +108,7 @@ namespace back_end.Data {
             return true;
         }
 
-        public async Task<bool> Exists(Guid id)
+        public virtual async Task<bool> Exists(Guid id)
         {
             try
             {
