@@ -38,7 +38,7 @@ namespace back_end.Controllers
                 return NotFound(new { message = "Usuário ou senha inválidos" });
 
             // Verifica se o e-mail já foi confirmado
-            if (user.EmailConfirmed == false)
+            if (user.StatusConta == false)
                 return NotFound(new { message = "E-mail não confirmado" });
 
             // Gera o Token
@@ -106,7 +106,7 @@ namespace back_end.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            user.EmailConfirmed = false;
+            user.StatusConta = false;
             user.Token = Guid.NewGuid().ToString();
             await _repository.Create(user);
 
@@ -130,7 +130,7 @@ namespace back_end.Controllers
                 return NotFound();
             }
 
-            user.EmailConfirmed = true;
+            user.StatusConta = true;
             user.Token = null;
             return await _repository.Update(user);
         }

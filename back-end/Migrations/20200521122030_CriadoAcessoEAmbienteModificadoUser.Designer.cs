@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using back_end.Data;
@@ -9,9 +10,10 @@ using back_end.Data;
 namespace webApiDB.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200521122030_CriadoAcessoEAmbienteModificadoUser")]
+    partial class CriadoAcessoEAmbienteModificadoUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,6 +116,9 @@ namespace webApiDB.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Foto")
                         .HasColumnType("text");
 
@@ -122,9 +127,6 @@ namespace webApiDB.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("text");
-
-                    b.Property<bool>("StatusConta")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Token")
                         .HasColumnType("text");
