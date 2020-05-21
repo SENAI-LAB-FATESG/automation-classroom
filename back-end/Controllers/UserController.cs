@@ -123,7 +123,6 @@ namespace back_end.Controllers
         [HttpGet("ConfirmEmail/{token}")]
         public async Task<ActionResult<User>> ConfirmEmail(string token)
         {
-            Console.Write(token);
             var user = _repository.ResearchToken(token);
 
             if (user == null)
@@ -140,17 +139,16 @@ namespace back_end.Controllers
         [HttpGet("RecoverPassword/{email}")]
         public async Task<ActionResult<User>> RecoverPassword(string email)
         {
-            var user = _repository.ResearchToken(email);
+            var user = _repository.ResearchEmail(email);
 
-            if (email == user.Email)
+            if (email != null)
             {
-                const string Regex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$";
-                var xeger = new Xeger(Regex);
-                var generatedString = xeger.Generate();
+                const string regex = @"^[0-9a-zA-Z\d]{8,12}$";
+                var xeger = new Xeger(regex, new Random()).Generate();  //cria uma string aleatoria com pelo menos 1 numero, 1 letra maiuscula e 1 letra minuscula
+                                                                        //com tamanho minimo de 8 caracteres e maximo 12
+                string message = "Sua senha foi resetada para : \n" + xeger + "\nTente logar novamente com essa credencial.";
 
-                string message = "Sua senha foi resetada para : \n" + generatedString + "\nTente logar novamente com essa credencial.";
-
-                user.Password = generatedString;
+                user.Password = xeger;
 
                 await new EmailSender().SendEmailAsync(user.Email, "Esqueci minha senha", message);
 
