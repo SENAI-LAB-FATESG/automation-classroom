@@ -67,6 +67,7 @@ namespace webApiDB
 
             // Repositories exposed to dependency injection
             services.AddScoped<UserRepository>();
+            services.AddScoped<AmbienteRepository>();
 
             services.AddTransient<EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);

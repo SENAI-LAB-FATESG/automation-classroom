@@ -11,5 +11,9 @@ namespace back_end.Data
         {
             
         }
+
+        public DbSet<back_end.Domain.Acesso> Acesso { get; set; }
+
+        public DbSet<back_end.Domain.Ambiente> Ambiente { get; set; }
     }
 }
